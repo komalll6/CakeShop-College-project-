@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SweetBake Bakery</title>
+<link rel="stylesheet" href="style.css">
+<!-- <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> -->
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+<div class="logo">
+<a href="index.html">🍰 SweetBake</a>
+</div>
+
+<div class="icons">
+<i class="fa fa-shopping-cart"></i>
+<span id="cart-count">0</span>
+</div>
+</header>
+
+<!-- HERO SECTION -->
+<section class="hero" id="home">
+<div class="hero-text">
+<h1>Delicious Cakes <br> Made With Love !</h1>
+<p>
+<strong>NEW COLLECTIONS:</strong> <br>
+Get a taste of happiness with our freshly baked cakes.<br> Perfect for every occasion, from birthdays to weddings. <br> Order now and indulge in sweetness!
+</p>
+<button onclick="exploreCakes()">Explore Cakes</button>
+</div>
+
+<div class="img-2">
+<img src="https://i.pinimg.com/736x/ac/10/6c/ac106cde6e25146ac8d42fa88b352e6a.jpg" alt="pastreies">
+</div>
+
+<div class="hero-img">
+<img src="https://i.pinimg.com/736x/47/3a/51/473a51c27aa2f3dc95f4c8e7a6e1d47d.jpg" alt="Delicious Cakes">
+</div>
+</section>
+
+<!--About-->
+<section class="about" id="about">
+<h2>About Us</h2>
+<p><strong>Welcome to SweetBake, where we turn your sweetest dreams into reality! We are a passionate team of bakers dedicated to creating delicious and visually stunning cakes for every occasion. With a commitment to using only the finest ingredients, we craft each cake with love and care, ensuring that every bite is a delightful experience. Whether you're celebrating a birthday, wedding, or any special event, SweetBake is here to make your moments unforgettable with our delectable creations. Join us on this sweet journey and let us bring joy to your celebrations!</strong></p>
+<div>
+<img src="https://i.pinimg.com/736x/45/2e/8c/452e8c2ac5d8056015676de71834ec00.jpg" alt="">
+</div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+<h2>Best Services</h2>
+
+<div class="service-container">
+<div class="service-card">
+
+<div class="service-imgg">
+<img src="a060a427f68abd42600b2f6dda6fc03e-removebg-preview.png" alt="">   
+</div>
+
+<i class="fa fa-cake-candles"></i>
+<h3>Fresh and Natural Ingredients</h3>
+<p>Modern cooking with fresh ingredients include natural milk, flour</p>
+</div>
+
+<div class="service-img">
+<img src="https://i.pinimg.com/736x/21/8d/d8/218dd8ec79627e40a63a0eda6b07041f.jpg">
+</div>
+
+<div class="service-card">
+<i class="fa fa-truck"></i>
+<div class="service-imgg">
+<img src="a060a427f68abd42600b2f6dda6fc03e-removebg-preview.png" alt="">   
+</div>
+<h3>Fast Delivery</h3>
+<p>Quick delivery across the city.And Known for fresh, fast delivery, often within 2 hours or same-day.</p>
+</div>
+
+<div class="service-card">
+<i class="fa fa-heart"></i>
+<div class="service-imgg">
+<img src="a060a427f68abd42600b2f6dda6fc03e-removebg-preview.png" alt="">   
+</div>
+<h3>Custom Cakes</h3>
+<p>high-quality images of themed, personalized, or multi-tiered designs,  alongside options for photo cakes</p>
+</div>
+</div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+<h2>Our Delicious Catalog Cakes</h2>
+<div class="product-grid">
+<div class="product-card">
+<img src="https://i.pinimg.com/736x/d0/f0/2a/d0f02abeab03190f3413ec570f7743e2.jpg">
+<h3>Pinkish Strawberry Cake</h3>
+<p>$20</p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://i.pinimg.com/736x/e5/a0/07/e5a007e8365550ef0e70ce86055a6fac.jpg">
+<h3>3D Vanilla Cake</h3>
+<p>$22</p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://i.pinimg.com/736x/37/0c/71/370c7191bb40313bfbb3dc51501d91ba.jpg">
+<h3>White Frosting Cake</h3>
+<p>$15</p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://i.pinimg.com/736x/f9/67/34/f9673415a6f03c0f9bcb7d5f38245d95.jpg">
+<h3>Ribbon Street Cake</h3>
+<p>$19</p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://i.pinimg.com/736x/22/ad/4d/22ad4d96add3530be3e0ed204a609b32.jpg">
+<h3>Classic Strawberry Cake</h3>
+<p>$14</p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://i.pinimg.com/736x/29/b5/4c/29b54cced4a78cbd1577dbc88a4cb449.jpg">
+<h3>Buttercream Cranberry Cake</h3>
+<p>$18</p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://i.pinimg.com/1200x/fd/c0/fc/fdc0fc9905fd013aadbf9fcdca4023b3.jpg">
+<h3>Pinkbutter Dreamy Layers Cake</h3>
+<p>$18</p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://i.pinimg.com/736x/cb/fd/2a/cbfd2a298feb646d69dac0aaea4f0e27.jpg">
+<h3>SweetColor Haven Cake</h3>
+<p>$18</p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://i.pinimg.com/736x/53/ec/e8/53ece8b98809f0b0ac283be2185cd7eb.jpg">
+<h3>Sweet Canvas Cake</h3>
+<p>$18</p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+
+<div class="product-card">
+<img src="https://i.pinimg.com/1200x/e9/a8/1f/e9a81faf30c82a255ec0c63be4d9b967.jpg">
+<h3>Heavenly Cartoon Cake</h3>
+<p>$18</p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+<div class="footer-container">
+<div>
+<h3>Products</h3>
+<p>Weeding Cakes</p>
+<p>Celebrations cakes</p>
+<p>Mini Cakes</p>
+<p>Cupcakes</p>
+</div>
+
+<div>
+<h3>Site</h3>
+<p>Home</p>
+<p>Products</p>
+<p>Services</p>
+<p>Contacts</p>
+</div>
+
+<div>
+<h3>Contact Details</h3>
+<p>Komss K. Fantasy foresting</p>
+<p>Jalandhar, punjab, India</p>
+<p>Call 78724-94829</p>
+<p>Komsfantasycake@gmail.com</p>
+</div>
+</div><hr>
+<p class="copyright">
+© 2026 Koms K. Fantasy foresting
+</p>
+</footer>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>

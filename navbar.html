@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Bake Cake</title>
+    <link rel="stylesheet" href="navbar.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+<header class="navbar">
+<div class="logo">
+<a href="index.html">🍰 SweetBake</a>
+
+</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="contact.html">Contact</a>
+
+<div class="dropdown">
+<span class="dropbtn">Products ▾</span>
+<div class="dropdown-content">
+<a href="cakes.html">Cakes</a>
+<a href="pastries.html">Pastries</a>
+<a href="brownies.html">Brownies</a>
+<a href="cookies.html">Cookies</a>
+<a href="croissant.html">Croissant</a>
+</div>
+</div>
+
+<a href="#services">Services</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<div class="icons">
+<i class="fa fa-shopping-cart"></i>
+<span id="cart-count">0</span>
+</div>
+</header>
+
+<script src="script.js"></script>
+
+<script>
+fetch("navbar.html")
+.then(res => res.text())
+.then(data => {
+document.getElementById("navbar").innerHTML = data;
+});
+</script>
+
+</body>
+</html>
