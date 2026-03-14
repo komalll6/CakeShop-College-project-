@@ -34,6 +34,13 @@ behavior:"smooth"
 });
 }
 
+//odering products
+// const params = new URLSearchParams(window.location.search);
+
+// document.getElementById("product-name").innerText = params.get("name");
+// document.getElementById("product-price").innerText = params.get("price");
+// document.getElementById("product-img").src = params.get("img");
+
 
 // document.addEventListener("DOMContentLoaded", function () {
 // const form = document.querySelector("#contactForm");
