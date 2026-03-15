@@ -13,10 +13,10 @@ behavior:"smooth"
 })
 }
 
-Explorebutton = openproductspage
-function exploreCakes(){
-window.location.href = "products.html";
-}
+// Explorebutton = openproductspage
+// function exploreCakes(){
+// window.location.href = "products";
+// }
 
 function slideRight(){
 document.getElementById("productSlider")

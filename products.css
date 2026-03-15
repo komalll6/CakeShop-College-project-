@@ -1,4 +1,4 @@
-*{
+/* *{
 margin:0;
 padding:0;
 box-sizing:border-box;
@@ -11,20 +11,20 @@ scroll-behavior:smooth;
 
 body{
 background:#f7f3ef;
-}
+} */
 
 /*BANNAR/HERO */
-.hero{
+/*.hero{
 position:relative;
 height:250px;   /* increase this */
-overflow:hidden;
-}
+/* overflow:hidden;
+} */
 
-.slider{
+/* .slider{
 display:flex;
-}
+} */
 
-.slide{
+/* .slide{
 display:none;
 align-items:center;
 justify-content:space-between;
@@ -48,11 +48,11 @@ padding-top: 25px;
 .content p{
     color:#f2e6e6;
     padding-left: 200px;
-}
+} */
 
-.content span{
+/* .content span{ */
 /* color:#ff2a7f; */
-color: rgb(231, 134, 134);
+/* color: rgb(231, 134, 134);
 }
 
 .hero-video{
@@ -93,15 +93,15 @@ font-size:25px;
 padding:10px 15px;
 cursor:pointer;
 border-radius:50%;
-}
+} */
 
-.prev{ left:20px; }
-.next{ right:20px; }
+/* .prev{ left:20px; }
+.next{ right:20px; } */
 
 
 /* NAVBAR */
 
-.navbar{
+/* .navbar{
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -111,15 +111,15 @@ position:sticky;
 top:0;
 box-shadow:0 2px 10px rgba(0,0,0,0.7);
 z-index:9999;   /* increase this */
-}
+/* }  */
 
-.logo{
+/* .logo{
 font-size:24px;
 font-weight:bold;
 color:#771a0f;
-}
+} */
 
-.logo a{
+/* .logo a{
 text-decoration:none;
 color:#771a0f;
 font-size:24px;
@@ -136,11 +136,11 @@ font-weight:500;
 nav a:hover{
 color:#771a0f;
 
-}
+} */
 
 /*NEW CODE*/
 
-nav a:hover{
+/* nav a:hover{
 color:#771a0f;
 font-weight:bold;
 }
@@ -158,11 +158,11 @@ border-radius:50%;
 position:absolute;
 top:-10px;
 right:-10px;
-}
+} */
 
 /*DROPDOWN MENU */
 
-.dropdown{
+/* .dropdown{
 position:relative;
 display:inline-block;
 }
@@ -197,10 +197,10 @@ color:#771a0f;
 
 .dropdown:hover .dropdown-content{
 display:block;
-}
+} */
 
 /*CAKES */
-.cakes{
+/* .cakes{
 padding:20px;
 text-align:center;
 }
@@ -249,10 +249,10 @@ background:#771a0f;
 color:white;
 border-radius:5px;
 cursor:pointer;
-}
+} */
 
 /*PASTRIES */
-.pastries{
+/* .pastries{
 padding:20px;
 text-align:center;
 }
@@ -301,11 +301,11 @@ background:#771a0f;
 color:white;
 border-radius:5px;
 cursor:pointer;
-}
+} */
 
 /*BROWNIES */
 
-.brownies{
+/* .brownies{
 padding:20px;
 text-align:center;
 }
@@ -354,11 +354,11 @@ background:#771a0f;
 color:white;
 border-radius:5px;
 cursor:pointer;
-}
+} */
 
 /* COOKIES */
 
-.cookies{
+/* .cookies{
 padding:20px;
 text-align:center;
 }
@@ -407,11 +407,11 @@ background:#771a0f;
 color:white;
 border-radius:5px;
 cursor:pointer;
-}
+} */
 
 /* CROSAINT */
 
-.croissant{
+/* .croissant{
 padding:20px;
 text-align:center;
 }
@@ -460,11 +460,11 @@ background:#771a0f;
 color:white;
 border-radius:5px;
 cursor:pointer;
-}
+} */
 
 /* FOOTER */
 
-footer{
+/* footer{
 background:rgba(24, 5, 5, 0.954);
 color:white;
 padding:50px;
@@ -491,4 +491,4 @@ cursor:pointer;
 text-align:center;
 margin-top:20px;
 font-size:13px;
-}
+} */

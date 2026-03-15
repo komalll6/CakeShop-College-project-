@@ -1,41 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SweetProduct Cake</title>
-    <link rel="stylesheet" href="order.css">
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Order Product</title>
+<title>Order Cake</title>
 <link rel="stylesheet" href="order.css">
 </head>
-
 <body>
 
-<h1>Order Your Cake</h1>
+<header class="navbar">
+<div class="logo">
+<a href="index.html">🍰 SweetBake</a>
+</div>
+
+<nav>
+<a href="index.html">Home</a>
+
+<div class="dropdown">
+<span class="dropbtn">Products ▾</span>
+<div class="dropdown-content">
+<a href="cakes.html">Cakes</a>
+<a href="pastries.html">Pastries</a>
+<a href="brownies.html">Brownies</a>
+<a href="cookies.html">Cookies</a>
+<a href="croissant.html">Croissant</a>
+</div>
+</div>
+
+<a href="index.html#services">Services</a>
+<a href="contact.html#contact">Contact</a>
+</nav>
+</header>
 
 <div class="order-container">
-
-<img id="products-img">
-
+<img id="productImg">
 <div class="details">
-<h2 id="products-name"></h2>
-<p id="products-price"></p>
+<h2 id="productName"></h2>
+<p class="price">$<span id="productPrice"></span></p>
+<h3>Select Weight</h3>
 
-<button>Add to Cart</button>
-<button>Buy Now</button>
+<div class="weights">
+<button onclick="changePrice(20)">1 KG</button>
+<button onclick="changePrice(35)">2 KG</button>
+<button onclick="changePrice(60)">4 KG</button>
+<button onclick="changePrice(75)">5 KG</button>
 </div>
 
+<h3>Description</h3>
+<p>
+Soft sponge cake layered with fresh strawberry cream and topped with
+delicious frosting. Perfect for birthdays, anniversaries and celebrations.
+</p>
+
+<div class="products-contain">
+<h3>Products Contains</h3>
+<ul>
+    <li>Flavour: Strawberry</li>
+    <li>Shpae: Square</li>
+    <li>Type: Cream Cake</li>
+</ul>
 </div>
 
-<script src="script.js"></script>
+<button class="buy">Buy Now</button>
+</div>
+</div>
 
-</body>
-</html>
+<!-- FOOTER -->
+<footer id="footer">
+<div class="footer-container">
+<div>
+<h3>Products</h3>
+<p>Weeding Cakes</p>
+<p>Celebrations cakes</p>
+<p>Mini Cakes</p>
+<p>Cupcakes</p>
+</div>
+
+<div>
+<h3>Site</h3>
+<p>Home</p>
+<p>Products</p>
+<p>Services</p>
+<p>Contacts</p>
+</div>
+
+<div>
+<h3>Contact Details</h3>
+<p>Komss K. Fantasy foresting</p>
+<p>Jalandhar, punjab, India</p>
+<p>Call 78724-94829</p>
+<p>Komsfantasycake@gmail.com</p>
+</div>
+</div><hr>
+<p class="copyright">
+© 2026 Koms K. Fantasy foresting
+</p>
+</footer>
+
+<script>
+const params = new URLSearchParams(window.location.search)
+
+document.getElementById("productName").innerText = params.get("name")
+
+document.getElementById("productPrice").innerText = params.get("price")
+
+document.getElementById("productImg").src = params.get("img")
+
+function changePrice(price){
+document.getElementById("productPrice").innerText = price
+}
+
+</script>
 </body>
 </html>
