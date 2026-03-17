@@ -8,7 +8,7 @@
 
 <header class="navbar">
 <div class="logo">
-<a href="index.html">🍰 SweetBake</a>
+<a href="index.html"><img src="2.png" alt=""></a>
 </div>
 
 <nav>
@@ -29,7 +29,6 @@
 <a href="contact.html#contact">Contact</a>
 </nav>
 </header>
-
 <div class="order-container">
 <img id="productImg">
 <div class="details">
@@ -37,31 +36,53 @@
 <p class="price">$<span id="productPrice"></span></p>
 <h3>Select Weight</h3>
 
-<div class="weights">
-<button onclick="changePrice(20)">1 KG</button>
-<button onclick="changePrice(35)">2 KG</button>
-<button onclick="changePrice(60)">4 KG</button>
-<button onclick="changePrice(75)">5 KG</button>
-</div>
+<div class="weights" id="weights"></div>
 
 <h3>Description</h3>
-<p>
-Soft sponge cake layered with fresh strawberry cream and topped with
-delicious frosting. Perfect for birthdays, anniversaries and celebrations.
-</p>
+<p id="description"></p>
 
 <div class="products-contain">
 <h3>Products Contains</h3>
 <ul>
-    <li>Flavour: Strawberry</li>
-    <li>Shpae: Square</li>
-    <li>Type: Cream Cake</li>
+<li>Flavour: <span id="flavour"></span></li>
+<li>Shape: <span id="shape"></span></li>
+<li>Type: <span id="type"></span></li>
 </ul>
 </div>
 
-<button class="buy">Buy Now</button>
+<button class="buy" onclick="openPayment()">Buy Now</button>
+
 </div>
 </div>
+
+<!-- PAYMENT POPUP -->
+
+<div class="payment-modal" id="paymentModal">
+<div class="payment-content">
+<span class="close" onclick="closePayment()">×</span>
+<h2>Order Summary</h2>
+<div class="order-summary">
+<img id="summaryImg">
+<h3 id="summaryName"></h3>
+<p>Price: $<span id="summaryPrice"></span></p>
+</div>
+<hr>
+<h3>Select Payment Method</h3>
+<label>
+<input type="radio" name="payment"> Credit / Debit Card
+</label><br><br>
+<label>
+<input type="radio" name="payment"> UPI Payment
+</label><br><br>
+<label>
+<input type="radio" name="payment"> Cash On Delivery
+</label>
+<br><br>
+<button onclick="confirmPayment()">Confirm Payment</button>
+<p id="paymentMsg"></p>
+</div>
+</div>
+
 
 <!-- FOOTER -->
 <footer id="footer">
@@ -96,18 +117,728 @@ delicious frosting. Perfect for birthdays, anniversaries and celebrations.
 </footer>
 
 <script>
+
 const params = new URLSearchParams(window.location.search)
 
-document.getElementById("productName").innerText = params.get("name")
+const name = params.get("name")
+const img = params.get("img")
 
-document.getElementById("productPrice").innerText = params.get("price")
+document.getElementById("productName").innerText = name
+document.getElementById("productImg").src = img
 
-document.getElementById("productImg").src = params.get("img")
 
-function changePrice(price){
-document.getElementById("productPrice").innerText = price
+const products = {
+
+"Pinkish Strawberry Cake":{
+desc:"Fresh strawberry sponge cake layered with creamy frosting.",
+flavour:"Strawberry",
+shape:"Square",
+type:"Strawberry Cream Cake",
+weights:{
+"1 KG":20,
+"2 KG":35,
+"4 KG":60
+}
+},
+
+"3D Vanilla Cake":{
+desc:"Soft vanilla sponge cake with creamy layers.",
+flavour:"Vanilla",
+shape:"Round",
+type:"Cream Cake",
+weights:{
+"1 KG":22,
+"2 KG":38,
+"4 KG":65
+}
+},
+
+"White Frosting Cake":{
+desc:"Classic white buttercream celebration cake.",
+flavour:"Vanilla",
+shape:"Round",
+type:"Buttercream Cake",
+weights:{
+"1 KG":15,
+"2 KG":28,
+"4 KG":50
+}
+},
+
+"Ribbon Street Cake":{
+desc:"Chocolate ribbon style celebration cake.",
+flavour:"Chocolate",
+shape:"Square",
+type:"Cream Cake",
+weights:{
+"1 KG":19,
+"2 KG":33,
+"4 KG":55
+}
+},
+
+"Classic Strawberry Cake":{
+desc:"Traditional strawberry cake topped with fresh cream.",
+flavour:"Strawberry",
+shape:"Round",
+type:"Cream Cake",
+weights:{
+"1 KG":18,
+"2 KG":20,
+"4 KG":30
+}
+},
+
+"Buttercream Cranberry Cake":{
+desc:"Traditional strawberry cake topped with fresh cream.",
+flavour:"Cranberry",
+shape:"Round",
+type:"Cream Cake",
+weights:{
+"1 KG":20,
+"2 KG":35,
+"4 KG":40
+}
+}, 
+"Pinkbutter Dreamy Layers Cake":{
+desc:"Rich and moist chocolate sponge layered with smooth chocolate ganache and topped with glossy pink-chocolate glaze. A perfect treat for chocolate lovers..",
+flavour:"Vanilla",
+shape:"Round",
+type:"Buttercream Cake",
+weights:{
+"1 KG":28,
+"2 KG":35,
+"4 KG":46
+}
+},
+
+"Ribbon Street Cake":{
+desc:"Chocolate ribbon style celebration cake.",
+flavour:"Chocolate",
+shape:"Square",
+type:"Cream Cake",
+weights:{
+"1 KG":19,
+"2 KG":33,
+"4 KG":55
+}
+},
+
+"Classic Strawberry Cake":{
+desc:"Rich and moist chocolate sponge layered with smooth chocolate ganache and topped with glossy chocolate glaze. A perfect treat for chocolate lovers.",
+flavour:"Straberry",
+shape:"Circle",
+type:"Cream Cake",
+weights:{
+"1 KG":19,
+"2 KG":33,
+"4 KG":55
+}
+},
+
+"Buttercream Cranberry Cake":{
+desc:"Rich and moist chocolate sponge layered with smooth chocolate ganache and topped with glossy chocolate glaze. A perfect treat for chocolate lovers.",
+flavour:"Cranberry",
+shape:"Circle",
+type:"Cream Cake",
+weights:{
+"1 KG":20,
+"2 KG":30,
+"4 KG":52
+}
+},
+
+"SweetColor Heaven Cake":{
+desc:"A soft and velvety red sponge cake layered with creamy cream cheese frosting, giving a perfect balance of sweetness and richness.",
+flavour:"Red-pinkist",
+shape:"Circle",
+type:"Cream Cake",
+weights:{
+"1 KG":50,
+"2 KG":55,
+"4 KG":60
+}
+},
+
+
+"Sweet Canvas Cake":{
+desc:"Soft sponge cake topped with fresh seasonal fruits and whipped cream, perfect for a light and healthy dessert..",
+flavour:"Fruit",
+shape:"Circle",
+type:"Cream Cake",
+weights:{
+"1 KG":35,
+"2 KG":50,
+"4 KG":62
+}
+},
+
+"Heavenly Cartoon Cake":{
+desc:"Soft sponge layered with fresh strawberry cream and juicy strawberry pieces, topped with fresh strawberries.",
+flavour:"Staberry",
+shape:"Circle",
+type:"Cream Cake",
+weights:{
+"1 KG":50,
+"2 KG":55,
+"4 KG":60
+}
+},
+
+//cookies
+"Classic Walnut Cookie":{
+desc:"Soft and buttery cookies loaded with rich chocolate chips, baked to golden perfection for a classic sweet treat.",
+flavour:"Chocolate",
+shape:"Circle",
+type:"Soft Baked Cookie",
+weights:{
+"1 KG":25,
+"2 KG":34,
+"4 KG":37
+}
+},
+
+"S'mores Cookies":{
+desc:"Deep chocolate cookies loaded with extra chocolate chunks for an intense chocolate flavor.",
+flavour:"Chocolate",
+shape:"Circle",
+type:"Rich Chocolate",
+weights:{
+"1 KG":25,
+"2 KG":34,
+"4 KG":37
+}
+},
+"ChocoFix, Cookie":{
+desc:"Light, crispy cookies made with rich butter that melt in your mouth with every bite.",
+flavour:"Buttery Vanilla",
+shape:"Circle",
+type:"Crisp Cookie",
+weights:{
+"1 KG":35,
+"2 KG":39,
+"4 KG":45
+}
+},
+
+"FudgeHub Scotland Cookie":{
+desc:"Wholesome cookies made with oats and sweet raisins, offering a chewy and comforting taste.",
+flavour:"Oats & Raisin",
+shape:"Circle",
+type:"Chewy Cookie",
+weights:{
+"1 KG":38,
+"2 KG":47,
+"4 KG":50
+}
+},
+"Heavy Chocolaty With Syrup Cookie":{
+desc:"Light, crispy cookies made with rich butter that melt in your mouth with every bite.",
+flavour:"Buttery Vanilla",
+shape:"Circle",
+type:"Crisp Cookie",
+weights:{
+"1 KG":48,
+"2 KG":50,
+"4 KG":68
+}
+},
+
+"Chocolaty Chewy Cookie":{
+desc:"Crisp cookies topped with roasted almond pieces for a nutty and rich flavor.",
+flavour:"Almond & Vanilla",
+shape:"Circle",
+type:"Crunchy Cookie",
+weights:{
+"1 KG":38,
+"2 KG":47,
+"4 KG":50
+}
+},
+"Rich Chocolate Nuts Cookie":{
+desc:"Cream-filled cookies made with rich chocolate biscuit layers and smooth cream filling.",
+flavour:"Cookies & Cream",
+shape:"Circle",
+type:"Crisp Cookie",
+weights:{
+"1 KG":48,
+"2 KG":50,
+"4 KG":68
+}
+},
+
+"Oatmeal Raisin Box Cookie":{
+desc:"Light, crispy cookies made with rich butter that melt in your mouth with every bite.",
+flavour:"Cashew & Butter",
+shape:"Rounded",
+type:"Butter Cookie",
+weights:{
+"1 KG":48,
+"2 KG":50,
+"4 KG":68
+}
+},
+
+"Soft Buttery Chocolate Cookie":{
+desc:"Premium buttery cookies with crunchy cashew pieces in every bite.",
+flavour:"Vanilla",
+shape:"Circle",
+type:"Decorated Cookie",
+weights:{
+"1 KG":38,
+"2 KG":47,
+"4 KG":50
+}
+},
+"Slight Tang From Cream Box Cookie":{
+desc:"Golden baked cookies made with shredded coconut for a sweet tropical flavor.",
+flavour:"Cookies & Cream",
+shape:"Circle",
+type:"Crisp Cookie",
+weights:{
+"1 KG":48,
+"2 KG":50,
+"4 KG":68
+}
+},
+
+//brownie
+"Classic Walnut Brownie":{
+desc:"A dense and fudgy chocolate brownie made with premium cocoa for an intense chocolate taste.",
+flavour:"Chocolate",
+shape:"Square",
+type:"Fudgy Brownie",
+weights:{
+"1 KG":57,
+"2 KG":68,
+"4 KG":75
+}
+},
+
+"S`mores Brownies":{
+desc:"Deep chocolate brownie loaded with chocolate chunks for an intense chocolate flavor.",
+flavour:"Chocolate",
+shape:"Square",
+type:"Rich Chocolate",
+weights:{
+"1 KG":48,
+"2 KG":59,
+"4 KG":65
+}
+},
+
+"ChocoFix, BrownieBox":{
+desc:"Rich chocolate brownie packed with chocolate chunks for a deep and indulgent chocolate experience.",
+flavour:"Buttery Vanilla",
+shape:"Square",
+type:"Crisp Brownie",
+weights:{
+"1 KG":38,
+"2 KG":49,
+"4 KG":55
+}
+},
+
+"FudgeHub with IceCream Brownie":{
+desc:"Wholesome brownie made with oats and sweet raisins, offering a chewy and comforting taste.",
+flavour:"Oats & Raisin",
+shape:"Square",
+type:"Chewy Brownie",
+weights:{
+"1 KG":38,
+"2 KG":47,
+"4 KG":50
+}
+},
+"Sea Salt Chocolate Brownie":{
+desc:"Light, crispy Brownie made with rich butter that melt in your mouth with every bite.",
+flavour:"Chocolate & Wafer",
+shape:"Square",
+type:"Crisp Brownie",
+weights:{
+"1 KG":48,
+"2 KG":50,
+"4 KG":68
+}
+},
+
+"Chocolaty Nuts Brownie":{
+desc:"Crisp brownie topped with roasted almond pieces for a nutty and rich flavor.",
+flavour:"Almond & Vanilla",
+shape:"Square",
+type:"Cream Filled Brownie",
+weights:{
+"1 KG":66,
+"2 KG":68,
+"4 KG":70
+}
+},
+"Rich chocolate Nuts Brownie":{
+desc:"Cream-filled brownie made with rich chocolate biscuit layers and smooth cream filling.",
+flavour:"Brownie & Cream",
+shape:"Square",
+type:"Crisp Brownie",
+weights:{
+"1 KG":48,
+"2 KG":50,
+"4 KG":68
+}
+},
+
+"Hits Walnut Brownie":{
+desc:"Light, crispy cookies made with rich butter that melt in your mouth with every bite.",
+flavour:"Cashew & Butter",
+shape:"Square",
+type:"Butter Brownie",
+weights:{
+"1 KG":48,
+"2 KG":50,
+"4 KG":68
+}
+},
+
+"Soft Buttery Chocolate Cookie":{
+desc:"Premium buttery cookies with crunchy cashew pieces in every bite.",
+flavour:"Vanilla",
+shape:"Circle",
+type:"Decorated Cookie",
+weights:{
+"1 KG":38,
+"2 KG":47,
+"4 KG":50
+}
+},
+"Overload Brownie dark chocolate":{
+desc:"Golden baked brownie made with shredded coconut for a sweet tropical flavor.",
+flavour:"Brownie & Cream",
+shape:"Square",
+type:"Crisp Brownie",
+weights:{
+"1 KG":48,
+"2 KG":50,
+"4 KG":68
+}
+},
+
+"Heavenly IceCream Triple Threat Brownie":{
+desc:"Golden baked brownie made with shredded coconut for a sweet tropical flavor.",
+flavour:"Brownie & Cream",
+shape:"Square",
+type:"Crisp Brownie",
+weights:{
+"1 KG":48,
+"2 KG":50,
+"4 KG":68
+}
+},
+
+//pastries
+"RED Strawberry Pastry":{
+desc:"Vanilla sponge layered with fresh strawberry cream and topped with juicy strawberries.",
+flavour:"High-Strawberry",
+shape:"Triangle-Slice",
+type:"Strawberry",
+weights:{
+"1 KG":26,
+"2 KG":38,
+"4 KG":40
+}
+},
+
+"Mint Orangish Pastry":{
+desc:"Soft vanilla sponge layered with whipped cream and juicy pineapple pieces for a refreshing taste.",
+flavour:"Green-RICH",
+shape:"Slice",
+type:"Rich Mint",
+weights:{
+"1 KG":25,
+"2 KG":29,
+"4 KG":35
+}
+},
+
+"Pink Strawberry With Wipped Pastry":{
+desc:"Smooth red velvet sponge layered with creamy cheese frosting for a rich and velvety flavor.",
+flavour:"Buttery Red-pink Strawberry",
+shape:"Triangle-slice",
+type:"Red Strawberry Velvet",
+weights:{
+"1 KG":20,
+"2 KG":29,
+"4 KG":35
+}
+},
+
+"Red Cherry Pastry":{
+desc:"Vanilla sponge layered with fresh strawberry cream and topped with juicy strawberries.",
+flavour:"Raisin",
+shape:"Tringle-slice",
+type:"Chewy Pastry",
+weights:{
+"1 KG":38,
+"2 KG":47,
+"4 KG":50
+}
+},
+"BlueBerry Voilet Pastry":{
+desc:"oft sponge layered with butterscotch cream and crunchy caramel bits and blueberry taste for a sweet and nutty taste.",
+flavour:"Blueberry-Wafer",
+shape:"Triangle-slice",
+type:"Crisp Pastry",
+weights:{
+"1 KG":20,
+"2 KG":24,
+"4 KG":30
+}
+},
+
+"3D Bluecherry Pastry":{
+desc:"Rich chocolate pastry topped with crispy Bluecherry pieces for a crunchy chocolate delight.",
+flavour:"Cookies & Cream Pastry",
+shape:"Slice",
+type:"Bluecherry Pastry",
+weights:{
+"1 KG":20,
+"2 KG":23,
+"4 KG":28
+}
+},
+"Motcha Green Pista Pastry":{
+desc:"Soft sponge cake layered with fresh Motcha cream for a tropical and refreshing taste.",
+flavour:"Green & Cream",
+shape:"Triangle-slice",
+type:"Motcha Pastey",
+weights:{
+"1 KG":48,
+"2 KG":50,
+"4 KG":68
+}
+},
+
+"Cocho SweetColor Heaven Pastry":{
+desc:"Light made with rich butter that melt in your mouth with every bite.",
+flavour:"Cashew & Butter",
+shape:"Triangle",
+type:"Buttery Cocho Pastry",
+weights:{
+"1 KG":48,
+"2 KG":50,
+"4 KG":68
+}
+},
+
+"Chocolaty Orange Pastry":{
+desc:"Soft chocolate sponge layered with smooth chocolate cream and topped with rich chocolate glaze.",
+flavour:"Rich Chocolaty",
+shape:"Triangle",
+type:"Decorated Pastry",
+weights:{
+"1 KG":48,
+"2 KG":57,
+"4 KG":60
+}
+},
+"Heavenly Blueberry Pastry":{
+desc:"Golden baked Blueberry made with shredded coconut for a sweet tropical flavor.",
+flavour:"Blue & Cream",
+shape:"Triangle",
+type:"Heavenly blueberry pastry",
+weights:{
+"1 KG":68,
+"2 KG":70,
+"4 KG":75
+}
+},
+
+//croissant
+"The Classic, Rich Strawberry Croissant":{
+desc:"A light and flaky croissant made with layers of buttery dough, baked to golden perfection.",
+flavour:"High-butter-Strawberry",
+shape:"Crescent",
+type:"Strawberry",
+weights:{
+"1 KG":59,
+"2 KG":60,
+"4 KG":65
+}
+},
+
+"Heavy standard Croissant Box":{
+desc:"A light and flaky croissant made with layers of buttery dough, baked to golden perfection.",
+flavour:"Chocolate",
+shape:"Crescent",
+type:"Filled Croisant",
+weights:{
+"1 KG":25,
+"2 KG":29,
+"4 KG":35
+}
+},
+
+"ChocoFix Loaded, Croissant":{
+desc:"Soft buttery croissant filled with creamy Nutella for a rich and indulgent flavor.",
+flavour:"Chocolate Hazelnut",
+shape:"Crescent",
+type:"Chocolate Filled Croissant",
+weights:{
+"1 KG":27,
+"2 KG":29,
+"4 KG":35
+}
+},
+
+"FudgeHub Twice-Baked Croissant":{
+desc:"Light flaky croissant glazed with sweet honey butter for a delicate and sweet taste.",
+flavour:"Raisin Butter",
+shape:"Crescent",
+type:"Sweet Croissant",
+weights:{
+"1 KG":75,
+"2 KG":87,
+"4 KG":90
+}
+},
+"Heaven Savory Variation Croissant":{
+desc:"Buttery croissant filled with chocolate and topped with crunchy almond slices.",
+flavour:"Chocolate & Almond",
+shape:"Crescent",
+type:"Crisp",
+weights:{
+"1 KG":55,
+"2 KG":64,
+"4 KG":69
+}
+},
+
+"Sweet Modern Pairing Croissant":{
+desc:"Fresh baked croissant filled with sweet jam and light cream.",
+flavour:"Cookies & Cream Croissant",
+shape:"Crescent",
+type:"Sweet jan Croissant",
+weights:{
+"1 KG":50,
+"2 KG":57,
+"4 KG":62
+}
+},
+"Rich Typically Softer Croissant":{
+desc:"A light and flaky croissant made with layers of buttery dough, baked to golden perfection.",
+flavour:"Buttery & Cream",
+shape:"Crescent",
+type:"Flaky Pastry",
+weights:{
+"1 KG":20,
+"2 KG":30,
+"4 KG":48
+}
+},
+
+"St. Martin`s Croissant":{
+desc:"Buttery croissant filled with almond cream and topped with sliced almonds for a nutty flavor.",
+flavour:"Cashew & Butter & Almond",
+shape:"Crescent",
+type:"Buttery Cocho Almond Croissant",
+weights:{
+"1 KG":38,
+"2 KG":40,
+"4 KG":58
+}
+},
+
+"Croissant Aux Amandes":{
+desc:"Flaky croissant filled with smooth vanilla cream for a light and creamy dessert.",
+flavour:"Rich Chocolaty Vanilla",
+shape:"Crescent",
+type:"Decorated Cream ",
+weights:{
+"1 KG":48,
+"2 KG":57,
+"4 KG":60
+}
+},
+"Slight Tang From Cream Box Croissant":{
+desc:"Golden baked croissant filled with melted cheese, perfect for a rich and savory snack.",
+flavour:"Cream",
+shape:"Crescent",
+type:"Heavenly Savory Croissant",
+weights:{
+"1 KG":78,
+"2 KG":80,
+"4 KG":85
+}
 }
 
+}
+
+
+
+
+if(products[name]){
+
+const p = products[name]
+
+document.getElementById("description").innerText = p.desc
+document.getElementById("flavour").innerText = p.flavour
+document.getElementById("shape").innerText = p.shape
+document.getElementById("type").innerText = p.type
+
+
+let weightHTML=""
+
+for(let w in p.weights){
+
+weightHTML += `<button onclick="changePrice(${p.weights[w]})">${w}</button>`
+
+}
+
+document.getElementById("weights").innerHTML = weightHTML
+
+document.getElementById("productPrice").innerText = Object.values(p.weights)[0]
+
+}
+
+
+function changePrice(price){
+
+document.getElementById("productPrice").innerText = price
+
+}
+
+/* PAYMENT POPUP */
+function openPayment(){
+document.getElementById("paymentModal").style.display="flex"
+document.getElementById("summaryImg").src =
+document.getElementById("productImg").src
+document.getElementById("summaryName").innerText =
+document.getElementById("productName").innerText
+document.getElementById("summaryPrice").innerText =
+document.getElementById("productPrice").innerText
+}
+
+function confirmPayment(){
+let method=document.querySelector('input[name="payment"]:checked')
+if(!method){
+alert("Please select payment method")
+return
+}
+document.getElementById("paymentMsg").innerText =
+"🎉 Order placed successfully!"
+}
+
+function closePayment(){
+document.getElementById("paymentModal").style.display="none"
+}
+function confirmPayment(){
+let method=document.querySelector('input[name="payment"]:checked')
+if(!method){
+alert("Please select payment method")
+return
+}
+document.getElementById("paymentMsg").innerText="🎉 Order placed successfully!"
+}
 </script>
+
+
+<script src="script.js"></script>
 </body>
 </html>

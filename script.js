@@ -1,10 +1,39 @@
-let cart = 0;
-/* Add to cart */
-function addCart(){
-cart++
-document.getElementById("cart-count").innerText = cart
-alert("Cake added to cart 🛒")
+//Add to Cart
+let cart = []
+function addCart(name,price){
+cart.push({name:name,price:price})
+updateCart()
 }
+function updateCart(){
+let cartItems=document.getElementById("cart-items")
+let cartCount=document.getElementById("cart-count")
+cartItems.innerHTML=""
+let total=0
+cart.forEach(item=>{
+total+=item.price
+cartItems.innerHTML+=`
+<div class="cart-item">
+<span>${item.name}</span>
+<span>$${item.price}</span>
+</div>
+`})
+
+cartCount.innerText=cart.length
+document.getElementById("cart-total").innerText=total
+document.getElementById("cart-panel").classList.add("active")
+}
+function closeCart(){
+document.getElementById("cart-panel").classList.remove("active")
+}
+
+
+// let cart = 0;
+// /* Add to cart */
+// function addCart(){
+// cart++
+// document.getElementById("cart-count").innerText = cart
+// alert("Cake added to cart 🛒")
+// }
 
 /* Explore cakes button */
 function exploreCakes(){
@@ -34,6 +63,9 @@ behavior:"smooth"
 });
 }
 
+
+
+
 //odering products
 // const params = new URLSearchParams(window.location.search);
 
@@ -51,3 +83,6 @@ behavior:"smooth"
 // form.reset(); // form clear
 // });
 // });
+
+//orderproducts
+
